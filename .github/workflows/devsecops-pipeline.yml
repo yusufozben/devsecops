@@ -180,9 +180,19 @@ jobs:
           --zone ${{ secrets.GKE_CLUSTER_ZONE }}
 
     # Deploy to Kubernetes
-    - name: Install GKE Auth Plugin manually
+    - name: Install GKE Auth Plugin (arch-aware)
       run: |
-        curl -Lo gke-gcloud-auth-plugin https://storage.googleapis.com/artifacts.gke.io/gke-gcloud-auth-plugin/latest/gke-gcloud-auth-plugin-linux-amd64
+        ARCH=$(uname -m)
+        if [ "$ARCH" = "x86_64" ]; then
+          BINARY_URL="https://storage.googleapis.com/artifacts.gke.io/gke-gcloud-auth-plugin/latest/gke-gcloud-auth-plugin-linux-amd64"
+        elif [ "$ARCH" = "aarch64" ]; then
+          BINARY_URL="https://storage.googleapis.com/artifacts.gke.io/gke-gcloud-auth-plugin/latest/gke-gcloud-auth-plugin-linux-arm64"
+        else
+          echo "Unsupported architecture: $ARCH"
+          exit 1
+        fi
+
+        curl -Lo gke-gcloud-auth-plugin "$BINARY_URL"
         chmod +x gke-gcloud-auth-plugin
         sudo mv gke-gcloud-auth-plugin /usr/local/bin/
 
