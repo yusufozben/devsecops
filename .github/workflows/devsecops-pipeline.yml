@@ -157,11 +157,12 @@ jobs:
         docker push ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE_NAME }}:latest
 
   deploy:
-    environment: gcp 
+deploy:
+    environment: gcp
     #needs: build-and-test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -174,18 +175,13 @@ jobs:
     - name: Set up kubectl
       uses: azure/setup-kubectl@v3
 
+    # Corrected GKE credentials step
     - name: Get GKE credentials
-      run: |
-        gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} \
-          --zone ${{ secrets.GKE_CLUSTER_ZONE }}
-
-    # Deploy to Kubernetes
-    - name: Install GKE Auth Plugin manually
-      run: |
-        curl -Lo gke-gcloud-auth-plugin https://storage.googleapis.com/artifacts.gke.io/gke-gcloud-auth-plugin/latest/gke-gcloud-auth-plugin-linux-amd64
-        chmod +x gke-gcloud-auth-plugin
-        sudo mv gke-gcloud-auth-plugin /usr/local/bin/
-
+      uses: google-github-actions/get-gke-credentials@v2
+      with:
+        cluster_name: ${{ secrets.GKE_CLUSTER_NAME }}
+        location: ${{ secrets.GKE_CLUSTER_ZONE }} # Use 'location' instead of 'zone' for consistency and correctness
+        project_id: ${{ env.PROJECT_ID }} # Ensure PROJECT_ID is passed, it's defined in env
 
     - name: Deploy to Kubernetes
       run: |
