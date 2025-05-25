@@ -157,7 +157,6 @@ jobs:
         docker push ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE_NAME }}:latest
 
   deploy:
-deploy:
     environment: gcp
     #needs: build-and-test
     runs-on: ubuntu-latest
