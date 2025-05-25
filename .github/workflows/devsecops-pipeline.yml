@@ -53,7 +53,7 @@ jobs:
     - name: Run Bandit Security Scan
       run: |
         bandit -r app/ -f json -o bandit-report.json --severity-level MEDIUM || true
-        bandit -r app/ -f txt --severity-level MEDIUM || exit 1
+        bandit -r app/ -f txt --severity-level medium || exit 1
 
     - name: Check for known security vulnerabilities
       run: |
