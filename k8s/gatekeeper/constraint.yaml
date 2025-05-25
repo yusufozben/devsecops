@@ -11,5 +11,5 @@ spec:
         kinds: ["Pod"]
   parameters:
     registries:
-      - "us-central1-docker.pkg.dev/YOUR_PROJECT_ID/"
+      - "us-central1-docker.pkg.dev/cmpe58e-460900/devsecops-repo/"
       - "gcr.io/YOUR_PROJECT_ID/" 
