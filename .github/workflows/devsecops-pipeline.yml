@@ -180,6 +180,10 @@ jobs:
           --zone ${{ secrets.GKE_CLUSTER_ZONE }}
 
     # Deploy to Kubernetes
+    - name: Install gke-gcloud-auth-plugin
+      run: |
+        gcloud components install gke-gcloud-auth-plugin
+
     - name: Deploy to Kubernetes
       run: |
         envsubst < k8s/deployment.yaml | kubectl apply -f -
