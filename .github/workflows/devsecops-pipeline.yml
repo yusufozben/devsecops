@@ -207,7 +207,18 @@ jobs:
         framework: terraform
         output_format: sarif
         output_file_path: checkov-results.sarif
+        quiet: false
+        soft_fail: false
       continue-on-error: true
+
+    - name: Display Checkov Results
+      run: |
+        if [ -f "checkov-results.sarif" ]; then
+          echo "Checkov results found:"
+          cat checkov-results.sarif
+        else
+          echo "No Checkov results file found"
+        fi
 
     - name: Check if Checkov results exist
       id: check-checkov
