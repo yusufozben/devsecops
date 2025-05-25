@@ -1,0 +1,15 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: AllowedRegistries
+metadata:
+  name: must-use-approved-registry
+spec:
+  match:
+    kinds:
+      - apiGroups: ["apps"]
+        kinds: ["Deployment"]
+      - apiGroups: [""]
+        kinds: ["Pod"]
+  parameters:
+    registries:
+      - "us-central1-docker.pkg.dev/YOUR_PROJECT_ID/"
+      - "gcr.io/YOUR_PROJECT_ID/" 

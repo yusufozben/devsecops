@@ -1,0 +1,22 @@
+[MASTER]
+load-plugins=
+
+[MESSAGES CONTROL]
+disable=C0103,C0111,R0903,W0613
+
+[REPORTS]
+output-format=text
+reports=yes
+
+[FORMAT]
+max-line-length=88
+
+[BASIC]
+good-names=i,j,k,ex,Run,_,id,db
+
+[DESIGN]
+max-args=7
+max-locals=15
+max-returns=6
+max-branches=12
+max-statements=50 
