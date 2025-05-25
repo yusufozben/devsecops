@@ -22,6 +22,7 @@ class MessageResponse(BaseModel):
     version: str
     environment: str
 
+
 @app.get("/health", response_model=HealthResponse)
 async def health():
     return HealthResponse(status="ok")
