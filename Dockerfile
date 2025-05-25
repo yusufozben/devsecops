@@ -1,4 +1,4 @@
-FROM python:3.8-slim
+FROM python:3.11-slim  # TODO: 6- python version for container security check
 
 WORKDIR /app
 
