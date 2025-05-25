@@ -57,6 +57,7 @@ jobs:
 
     - name: Check for known security vulnerabilities
       run: |
+        safety auth --api-key ${{ secrets.SAFETY_API_KEY }}
         safety scan --full-report --output json --output-format json || true
         safety scan --full-report || exit 1
 
