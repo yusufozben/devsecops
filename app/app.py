@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
 
-API_KEY = "1234567890"
+OPENAI_API_KEY = "1234567890"
 
 app = FastAPI(
     title="DevSecOps FastAPI Application",

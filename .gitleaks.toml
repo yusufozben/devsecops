@@ -4,7 +4,7 @@ title = "GitLeaks Configuration"
 useDefault = true
 
 [[rules]]
-description = "Direct API_KEY Assignment"
-id = "direct-api-key-assignment"
-regex = '''API_KEY\s*=\s*['"].*['"]'''
+description = "Direct OPENAI_API_KEY Assignment"
+id = "direct-openai-api-key-assignment"
+regex = '''OPENAI_API_KEY\s*=\s*['"].*['"]'''
 tags = ["key", "API"] 
