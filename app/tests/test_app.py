@@ -13,7 +13,8 @@ async def test_read_root():
         response = await ac.get("/")
     assert response.status_code == 200, f"Expected status code 200, got {response.status_code}"
     data = response.json()
-    assert data["message"] == "Hello DevSecOps with FastAPI!", f"Unexpected message: {data['message']}"
+    assert data[
+        "message"] == "Hello DevSecOps with FastAPI!", f"Unexpected message: {data['message']}"
     assert data["version"] == "1.0.0", f"Unexpected version: {data['version']}"
 
 
