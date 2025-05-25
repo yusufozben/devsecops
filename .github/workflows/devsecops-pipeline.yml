@@ -55,17 +55,10 @@ jobs:
         bandit -r app/ -f json -o bandit-report.json --severity-level MEDIUM || true
         bandit -r app/ -f txt --severity-level medium || exit 1
 
-    - name: Example workflow for Python using Safety Action
-      on: push
-      jobs:
-        security:
-          runs-on: ubuntu-latest
-          steps:
-            - uses: actions/checkout@main
-            - name: Run Safety CLI to check for vulnerabilities
-              uses: pyupio/safety-action@v1
-              with:
-                api-key: ${{ secrets.SAFETY_API_KEY }}
+    - name: Run Safety CLI to check for vulnerabilities
+      uses: pyupio/safety-action@v1
+      with:
+        api-key: ${{ secrets.SAFETY_API_KEY }}
 
     # GitHub Security Features
     - name: Initialize CodeQL
