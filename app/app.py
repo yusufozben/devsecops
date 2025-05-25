@@ -1,6 +1,6 @@
+import os
 from fastapi import FastAPI
 from pydantic import BaseModel
-import os
 import uvicorn
 
 app = FastAPI(
@@ -35,8 +35,8 @@ async def read_item(item_id: int, q: str = None):
 
 if __name__ == "__main__":
     uvicorn.run(
-        "app:app", 
-        host="0.0.0.0", 
-        port=int(os.getenv("PORT", 8000)),
+        "app:app",
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", "8000")),
         reload=False
     ) 

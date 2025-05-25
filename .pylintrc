@@ -1,22 +1,158 @@
 [MASTER]
-load-plugins=
+# Python version to use for the analysis
+python-version=3.11
+
+# Add any Python module names here where they should be available in the
+# environment. This is useful for some packages that are not properly
+# installed in the environment.
+extension-pkg-whitelist=pydantic
+
+# Use multiple processes to speed up Pylint.
+jobs=0
 
 [MESSAGES CONTROL]
-disable=C0103,C0111,R0903,W0613
+# Disable specific warnings
+disable=C0111,  # missing-docstring
+        C0103,  # invalid-name
+        C0303,  # trailing-whitespace
+        C0304,  # missing-final-newline
+        W1508,  # invalid-envvar-default
+        C0411,  # wrong-import-order
 
 [REPORTS]
 output-format=text
 reports=yes
 
 [FORMAT]
-max-line-length=88
+# Maximum number of characters on a single line.
+max-line-length=120
+
+# Maximum number of lines in a module
+max-module-lines=1000
+
+# String used as indentation unit. This is usually " " (4 spaces) or "\t" (1
+# tab).
+indent-string='    '
 
 [BASIC]
-good-names=i,j,k,ex,Run,_,id,db
+# Regular expression which should only match function or class names that do
+# not require a docstring.
+no-docstring-rgx=__.*__
+
+# List of decorators that produce properties, such as abc.abstractproperty. Add
+# to this list to register other decorators that produce valid properties.
+property-classes=abc.abstractproperty
+
+# List of method names used to declare (i.e. assign) instance attributes.
+defining-attr-methods=__init__,__new__,setUp
+
+# List of valid names for the first argument in a class method.
+valid-classmethod-first-arg=cls
+
+# List of valid names for the first argument in a metaclass class method.
+valid-metaclass-classmethod-first-arg=mcs
+
+# Good variable names which should always be accepted, separated by a comma.
+good-names=i,j,k,ex,Run,_,id
+
+[TYPECHECK]
+# List of module names for which member attributes should not be checked
+ignored-modules=numpy,tensorflow,torch,cv2
+
+# List of classes names for which member attributes should not be checked
+ignored-classes=SQLObject
+
+# List of module names for which member attributes should not be checked when
+# looking for unused attributes
+ignored-attributes=__dict__,__class__,__slots__,__weakref__,__metaclass__
+
+[SIMILARITIES]
+# Minimum lines number of a similarity.
+min-similarity-lines=4
+
+# Ignore imports when computing similarities.
+ignore-imports=yes
+
+# Ignore docstrings when computing similarities.
+ignore-docstrings=yes
+
+# Ignore comments when computing similarities.
+ignore-comments=yes
+
+[MISCELLANEOUS]
+# List of note tags to take into consideration.  Empty to allow all.
+notes=FIXME,TODO,XXX,HACK
+
+[VARIABLES]
+# A regular expression matching the name of dummy variables (i.e. expectedly
+# not used).
+dummy-variables-rgx=_$|dummy
+
+# List of additional names considered to be builtins
+additional-builtins=
+
+# Tells whether we should check for unused import in __init__ files.
+init-import=no
+
+# A regular expression matching the name of variables that are used to store
+# the result of a call to the builtin function next().
+next-regex=__next__|next
+
+# A regular expression matching the name of variables that are used to store
+# the result of a call to the builtin function next().
+next-value-regex=__next__|next
+
+[CLASSES]
+# List of method names used to declare (i.e. assign) instance attributes.
+defining-attr-methods=__init__,__new__,setUp
+
+# List of valid names for the first argument in a class method.
+valid-classmethod-first-arg=cls
+
+# List of valid names for the first argument in a metaclass class method.
+valid-metaclass-classmethod-first-arg=mcs
 
 [DESIGN]
-max-args=7
-max-locals=15
+# Maximum number of arguments for function / method
+max-args=10
+
+# Maximum number of attributes for a class (see R0902).
+max-attributes=15
+
+# Maximum number of public methods for a class (see R0904).
+max-public-methods=20
+
+# Maximum number of return / yield for function / method body
 max-returns=6
+
+# Maximum number of branch for function / method body
 max-branches=12
-max-statements=50 
+
+# Maximum number of local variables for function / method body
+max-locals=15
+
+# Maximum number of statements in function / method body
+max-statements=50
+
+# Maximum number of parents for a class (see R0901).
+max-parents=7
+
+[IMPORTS]
+# Deprecated modules which should not be used, separated by a comma
+deprecated-modules=regsub,TERMIOS,Bastion,rexec
+
+# Create a graph of external dependencies in the given file (report RP0402 must
+# not be disabled)
+import-graph=
+
+# Create a graph of every (i.e. internal and external) dependencies in the
+# given file (report RP0402 must not be disabled)
+ext-import-graph=
+
+# Create a graph of internal dependencies in the given file (report RP0402 must
+# not be disabled)
+int-import-graph=
+
+[EXCEPTIONS]
+# Exceptions that will emit a warning when being caught. Defaults to
+# "Exception" 
