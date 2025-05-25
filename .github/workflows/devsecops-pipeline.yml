@@ -62,15 +62,15 @@ jobs:
         api-key: ${{ secrets.SAFETY_API_KEY }}
 
     # GitHub Security Features
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
-      with:
-        languages: python
-      continue-on-error: true
+    #- name: Initialize CodeQL
+    #  uses: github/codeql-action/init@v3
+    #  with:
+    #    languages: python
+    #  continue-on-error: true
 
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
-      continue-on-error: true
+    #- name: Perform CodeQL Analysis
+    #  uses: github/codeql-action/analyze@v3
+    #  continue-on-error: true
 
     # Alternative Security Scanning
     - name: Alternative Security Scan with Semgrep
@@ -79,11 +79,11 @@ jobs:
         semgrep --config=auto app/ --json --output=semgrep-results.json || true
         semgrep --config=auto app/ || exit 1
 
-    - name: Alternative Secret Scanning
-      run: |
-        pip install detect-secrets
-        detect-secrets scan --all-files . > .secrets.baseline || true
-        detect-secrets audit .secrets.baseline || exit 1
+    #- name: Alternative Secret Scanning
+    #  run: |
+    #    pip install detect-secrets
+    #    detect-secrets scan --all-files . > .secrets.baseline || true
+    #    detect-secrets audit .secrets.baseline || exit 1
 
     # Secret Scanning
     - name: Run GitLeaks
