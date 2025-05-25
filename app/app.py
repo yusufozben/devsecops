@@ -11,7 +11,10 @@ app = FastAPI(
 
 
 class HealthResponse(BaseModel):
-status: str # TODO: formatting error
+    status: str # TODO: pylint syntax error. delete tab
+
+
+
 
 
 class MessageResponse(BaseModel):
