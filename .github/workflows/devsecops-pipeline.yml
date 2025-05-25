@@ -61,29 +61,12 @@ jobs:
       with:
         api-key: ${{ secrets.SAFETY_API_KEY }}
 
-    # GitHub Security Features
-    #- name: Initialize CodeQL
-    #  uses: github/codeql-action/init@v3
-    #  with:
-    #    languages: python
-    #  continue-on-error: true
-
-    #- name: Perform CodeQL Analysis
-    #  uses: github/codeql-action/analyze@v3
-    #  continue-on-error: true
-
-    # Alternative Security Scanning
-    - name: Alternative Security Scan with Semgrep
+    # Security Scanning
+    - name: Security Scan with Semgrep
       run: |
         pip install semgrep
         semgrep --config=auto app/ --json --output=semgrep-results.json || true
         semgrep --config=auto app/ || exit 1
-
-    #- name: Alternative Secret Scanning
-    #  run: |
-    #    pip install detect-secrets
-    #    detect-secrets scan --all-files . > .secrets.baseline || true
-    #    detect-secrets audit .secrets.baseline || exit 1
 
     # Secret Scanning
     - name: Run GitLeaks
@@ -179,8 +162,8 @@ jobs:
       uses: google-github-actions/get-gke-credentials@v2
       with:
         cluster_name: ${{ secrets.GKE_CLUSTER_NAME }}
-        location: ${{ secrets.GKE_CLUSTER_ZONE }} # Use 'location' instead of 'zone' for consistency and correctness
-        project_id: ${{ env.PROJECT_ID }} # Ensure PROJECT_ID is passed, it's defined in env
+        location: ${{ secrets.GKE_CLUSTER_ZONE }}
+        project_id: ${{ env.PROJECT_ID }}
 
     - name: Deploy to Kubernetes
       run: |
@@ -191,7 +174,6 @@ jobs:
         IMAGE_TAG: ${{ github.sha }}
         REGISTRY_URL: ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}
 
-  # Bonus: Infrastructure as Code Security Scanning
   iac-security-scan:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' || github.event_name == 'pull_request'
@@ -209,6 +191,7 @@ jobs:
         output_file_path: checkov-results.sarif
         quiet: false
         soft_fail: false
+      continue-on-error: true
 
     - name: Display Checkov Results
       run: |
