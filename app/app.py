@@ -21,21 +21,13 @@ class MessageResponse(BaseModel):
     environment: str
 
 
-@app.get("/", response_model=MessageResponse)
-async def read_root():
-    return MessageResponse(message="Hello DevSecOps with FastAPI!",
-                           version="1.0.0",
-                           environment=os.getenv("ENV", "development"))
+class SumResponse(BaseModel):
+    result: int
 
 
-@app.get("/health", response_model=HealthResponse)
-async def health_check():
-    return HealthResponse(status="healthy")
-
-
-@app.get("/items/{item_id}")
-async def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+@app.get("/sum", response_model=SumResponse)
+async def sum_two_numbers(a: int, b: int):
+    return SumResponse(result=a + b)
 
 
 if __name__ == "__main__":
