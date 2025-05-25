@@ -209,7 +209,6 @@ jobs:
         output_file_path: checkov-results.sarif
         quiet: false
         soft_fail: false
-      continue-on-error: true
 
     - name: Display Checkov Results
       run: |

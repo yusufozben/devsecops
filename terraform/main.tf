@@ -3,16 +3,8 @@ resource "google_storage_bucket" "example" {
   name     = "devsecops-test-bucket"
   location = "US"
   
-  # FAIL: Disabled versioning
-  versioning {
-    enabled = false
-  }
-  
   # FAIL: Public access allowed
   public_access_prevention = false
-  
-  # FAIL: Missing encryption
-  uniform_bucket_level_access = false
 }
 
 resource "google_compute_instance" "example" {
