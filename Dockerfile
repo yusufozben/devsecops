@@ -1,4 +1,5 @@
-FROM python:3.11-slim  # TODO: 6- container security check delete slim
+# TODO: 6- container security check delete slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
