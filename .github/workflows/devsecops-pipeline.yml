@@ -57,7 +57,7 @@ jobs:
 
     - name: Check for known security vulnerabilities
       run: |
-        safety scan --full-report --output safety-report.json --output-format json || true
+        safety scan --full-report --output json --output-format json || true
         safety scan --full-report || exit 1
 
     # GitHub Security Features
