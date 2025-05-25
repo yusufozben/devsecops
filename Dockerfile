@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM python:3.11-slim  # TODO: 6- container security check delete slim
 
 WORKDIR /app
 
@@ -10,9 +10,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app/ .
 
 # Create non-root user
-#RUN adduser --disabled-password --gecos '' appuser && \
-#    chown -R appuser:appuser /app
-#USER appuser
+RUN adduser --disabled-password --gecos '' appuser && \
+    chown -R appuser:appuser /app
+USER appuser
 
 EXPOSE 8000
 

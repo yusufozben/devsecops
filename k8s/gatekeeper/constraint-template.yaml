@@ -12,8 +12,8 @@ spec:
         properties:
           registries:
             type: array
-            items:
-              type: string
+            items: [] # TODO: 7- gatekeeper security check delete array
+              # type: string
   targets:
     - target: admission.k8s.gatekeeper.sh
       rego: |
