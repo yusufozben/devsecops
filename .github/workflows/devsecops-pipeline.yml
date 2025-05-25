@@ -57,8 +57,8 @@ jobs:
 
     - name: Check for known security vulnerabilities
       run: |
-        safety check --json --output safety-report.json || true
-        safety check || exit 1
+        safety scan --full-report --output safety-report.json --output-format json || true
+        safety scan --full-report || exit 1
 
     # GitHub Security Features
     - name: Initialize CodeQL
