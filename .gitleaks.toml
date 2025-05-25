@@ -4,13 +4,7 @@ title = "GitLeaks Configuration"
 useDefault = true
 
 [[rules]]
-description = "AWS Access Key ID"
-id = "aws-access-key-id"
-regex = '''(?i)aws(.{0,20})?(?-i)['\"][0-9a-zA-Z]{16,32}['\"]'''
-tags = ["key", "AWS"]
-
-[[rules]]
-description = "Generic API Key"
-id = "generic-api-key"
-regex = '''(?i)(api_key|apikey|secret|token)(.{0,20})?['\"][0-9a-zA-Z]{16,}['\"]'''
+description = "Direct API_KEY Assignment"
+id = "direct-api-key-assignment"
+regex = '''API_KEY\s*=\s*['"].*['"]'''
 tags = ["key", "API"] 
