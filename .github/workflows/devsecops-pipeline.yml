@@ -56,8 +56,9 @@ jobs:
         bandit -r app/ -f txt --severity-level medium || exit 1
 
     - name: Check for known security vulnerabilities
+      env:
+        SAFETY_API_KEY: ${{ secrets.SAFETY_API_KEY }}
       run: |
-        safety auth --api-key ${{ secrets.SAFETY_API_KEY }}
         safety scan --full-report --output json --output-format json || true
         safety scan --full-report || exit 1
 
