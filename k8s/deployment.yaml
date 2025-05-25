@@ -17,6 +17,8 @@ spec:
         # This annotation will be used by OPA Gatekeeper
         allowed-registry: "us-central1-docker.pkg.dev"
     spec:
+      imagePullSecrets:
+      - name: gcp-artifact-registry-secret
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
