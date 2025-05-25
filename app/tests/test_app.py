@@ -13,4 +13,5 @@ async def test_sum_two_numbers():
         response = await ac.get("/sum?a=3&b=5")
     assert response.status_code == 200, f"Expected status code 200, got {response.status_code}"
     data = response.json()
-    assert data["result"] == 7, f"Unexpected sum result: {data['result']}" # TODO: 3- assert error
+    assert data[
+        "result"] == 7, f"Unexpected sum result: {data['result']}"  # TODO: 3- assert error
