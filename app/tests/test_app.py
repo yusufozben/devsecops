@@ -6,6 +6,7 @@ from httpx import AsyncClient
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from app import app
 
+
 @pytest.mark.asyncio
 async def test_read_root():
     async with AsyncClient(app=app, base_url="http://test") as ac:
@@ -15,6 +16,7 @@ async def test_read_root():
     assert data["message"] == "Hello DevSecOps with FastAPI!"
     assert data["version"] == "1.0.0"
 
+
 @pytest.mark.asyncio
 async def test_health_check():
     async with AsyncClient(app=app, base_url="http://test") as ac:
@@ -22,6 +24,7 @@ async def test_health_check():
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "healthy"
+
 
 @pytest.mark.asyncio
 async def test_read_item():
@@ -32,6 +35,7 @@ async def test_read_item():
     assert data["item_id"] == 1
     assert data["q"] == "test"
 
+
 @pytest.mark.asyncio
 async def test_read_item_without_query():
     async with AsyncClient(app=app, base_url="http://test") as ac:
@@ -39,4 +43,4 @@ async def test_read_item_without_query():
     assert response.status_code == 200
     data = response.json()
     assert data["item_id"] == 42
-    assert data["q"] is None 
+    assert data["q"] is None
