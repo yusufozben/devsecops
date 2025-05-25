@@ -11,7 +11,7 @@ app = FastAPI(
 
 
 class HealthResponse(BaseModel):
-    status: str
+status: str # TODO: formatting error
 
 
 class MessageResponse(BaseModel):
