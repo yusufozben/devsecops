@@ -82,7 +82,7 @@ jobs:
     - name: Alternative Secret Scanning
       run: |
         pip install detect-secrets
-        detect-secrets scan --all-files . --baseline .secrets.baseline || true
+        detect-secrets scan --all-files . > .secrets.baseline || true
         detect-secrets audit .secrets.baseline || exit 1
 
     # Secret Scanning
