@@ -13,7 +13,7 @@ app = FastAPI(
 
 
 class HealthResponse(BaseModel):
-status: str  # TODO: 1- pylint syntax error. delete tab
+    status: str  # TODO: 1- pylint syntax error. delete tab
 
 
 # TODO: 2- add blank lines for formatting error
@@ -21,6 +21,10 @@ class MessageResponse(BaseModel):
     message: str
     version: str
     environment: str
+
+@app.get("/health", response_model=HealthResponse)
+async def health():
+    return HealthResponse(status="ok")
 
 
 class SumResponse(BaseModel):
