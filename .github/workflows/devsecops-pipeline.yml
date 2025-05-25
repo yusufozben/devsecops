@@ -180,10 +180,12 @@ jobs:
           --zone ${{ secrets.GKE_CLUSTER_ZONE }}
 
     # Deploy to Kubernetes
-    - name: Install GKE Auth Plugin
+    - name: Install GKE Auth Plugin manually
       run: |
-        sudo apt-get update
-        sudo apt-get install google-cloud-cli-gke-gcloud-auth-plugin
+        curl -Lo gke-gcloud-auth-plugin https://storage.googleapis.com/artifacts.gke.io/gke-gcloud-auth-plugin/latest/gke-gcloud-auth-plugin-linux-amd64
+        chmod +x gke-gcloud-auth-plugin
+        sudo mv gke-gcloud-auth-plugin /usr/local/bin/
+
 
     - name: Deploy to Kubernetes
       run: |
