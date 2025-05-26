@@ -12,7 +12,8 @@ spec:
         properties:
           registries:
             type: array
-            items: []  # TODO: 7- gatekeeper security check add array
+            items:
+              type: string
   targets:
     - target: admission.k8s.gatekeeper.sh
       rego: |
