@@ -173,3 +173,8 @@ jobs:
       env:
         IMAGE_TAG: ${{ github.sha }}
         REGISTRY_URL: ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}
+
+    - name: Apply Gatekeeper Policies
+      run: |
+        kubectl apply -f k8s/gatekeeper/constraint-template.yaml
+        kubectl apply -f k8s/gatekeeper/allowed-registries-constraint.yaml
